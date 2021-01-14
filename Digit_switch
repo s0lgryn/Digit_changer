@@ -1,0 +1,40 @@
+#include <iostream>
+#include<cmath>
+using namespace std;
+
+int Number(int n)				//подсчёт количества цифр в числе
+{
+	int count = 0;
+	while (n > 0)
+	{
+		count++;					//переменная хранящая количество цифр
+		n = n / 10;
+	}
+	return count;
+}
+
+
+int change(int& n)
+{
+	int count = Number(n);                   //смысл в том, что 
+	int first = n/pow(10,count-1);			//первая цифра , вычисляется как исходное число / на разряд цифры
+	int last = n % 10;											//последняя цифра числа
+	int mid = n - (pow(10, count-1) * first) - last; //средняя часть числа, вычисляется как исходное число - (первое цифра*разряд)- последняя цифра
+	n = (last * pow(10, count - 1)) + mid + first; //само решение. Последняя цифра(та которая перемещается, умножается на 1 разряд числа)+ средняя часть числа+ первая цифра
+	return n;
+}
+
+int main()
+{
+	setlocale(LC_ALL, "Russian");
+	int n;
+	cout << "Введите ваше число ";
+	cin >> n;
+
+	{
+		change(n);
+		cout << "ОТВЕТ: " << n;
+	}
+}
+
+
